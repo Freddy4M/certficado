@@ -20,3 +20,31 @@
 ![image](https://github.com/Freddy4M/proyecto-sap/assets/48028307/b6981b95-c14d-4ebb-a32c-4a879fe09d1d)
 Mas informacion :
 https://github.com/SAP-samples/teched2022-AD280/tree/main/exercises/ex2/ex2.1
+
+## Nombre de los archivos (vista y controladores).
+(Vistas)
+```
+detallesView.view.xml
+evaluaciones.view.xml
+form.view.xml
+home.view.xml
+View2.view.xml
+ViewTo.view.xml
+```
+(controllers)
+```
+detallesView.controller.js
+evaluaciones.controller.js
+form.controller.js
+home.controller.js
+View2.controller.js
+ViewTo.controller.js
+```
+
+Debes copiar el codigo para cada archivo creado
+## detallesView.view.xml.
+```
+
+
+```
+
