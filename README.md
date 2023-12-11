@@ -1030,3 +1030,257 @@ sap.ui.define([
 </mvc:View>
 
 ```
+
+## Creacion del archivo Manifest.json
+manifest.json
+```
+{
+  "_version": "1.59.0",
+  "sap.app": {
+    "id": "tech",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.11.5",
+      "toolsId": "7ebfcd5b-8f97-4e1e-888d-f33ff74f48bf"
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "dev-display": {
+          "semanticObject": "dev",
+          "action": "display",
+          "title": "{{flpTitle}}",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": false,
+    "dependencies": {
+      "minUI5Version": "1.120.1",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.f": {},
+        "sap.suite.ui.generic.template": {},
+        "sap.ui.comp": {},
+        "sap.ui.generic.app": {},
+        "sap.ui.table": {},
+        "sap.ushell": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "tech.i18n.i18n"
+        }
+      },
+      "listApis":{
+        "type": "sap.ui.model.json.JSONModel",
+        "uri": "https://48823328-9e21-4a40-8cdb-0abf3a63aec1.mock.pstmn.io/v1/data"
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "async": true,
+        "viewPath": "tech.view",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "clearControlAggregation": false
+      },
+      "routes": [
+        {
+          "name": "Routehome",
+          "pattern": ":?query:",
+          "target": [
+            "Targethome"
+          ]
+        },
+        {
+					"name": "TargetViewTo",
+					"pattern": "RouteViewTo",
+					"titleTarget": "",
+					"greedy": false,
+					"target": [
+						"TargetViewTo"
+					]
+				},
+        {
+					"name": "TargetViewToParameter",
+					"pattern": "RouteViewTo/{parameter}",
+					"titleTarget": "",
+					"greedy": false,
+					"target": [
+						"TargetViewToParameter"
+					]
+				},
+        {
+					"name": "TargetView2",
+					"pattern": "RouteView2",
+					"titleTarget": "",
+					"greedy": false,
+					"target": [
+						"TargetView2"
+					]
+				},
+        {
+					"name": "Targetform",
+					"pattern": "Routeform",
+					"titleTarget": "",
+					"greedy": false,
+					"target": [
+						"Targetform"
+					]
+				},
+        {
+					"name": "Targetevaluaciones",
+					"pattern": "Routeevaluaciones",
+					"titleTarget": "",
+					"greedy": false,
+					"target": [
+						"Targetevaluaciones"
+					]
+				},
+        {
+					"name": "TargetdetallesView",
+					"pattern": "RoutedetallesView/{parameter}",
+					"titleTarget": "",
+					"greedy": false,
+					"target": [
+						"TargetdetallesView"
+					]
+				}
+      ],
+      "targets": {
+        "Targethome": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "home",
+          "viewName": "home"
+        },
+        "TargetViewTo": {
+					"viewType": "XML",
+					"viewName": "ViewTo"
+				},
+        "TargetViewToParameter": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearControlAggregation": false,
+					"viewName": "ViewTo"
+				},
+        "TargetView2": {
+					"viewType": "XML",
+					"viewName": "View2"
+				},
+        "Targetform": {
+          "viewType": "XML",
+					"viewName": "form"
+        },
+        "Targetevaluaciones":{
+          "viewType": "XML",
+					"viewName": "evaluaciones"
+        },
+        "TargetdetallesView":{
+          "viewType": "XML",
+					"transition": "slide",
+					"clearControlAggregation": false,
+					"viewName": "detallesView"
+        }
+
+      }
+    },
+    "rootView": {
+      "viewName": "tech.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "App"
+    }
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "tech"
+  }
+}
+
+```
+
+Component.js
+```
+/**
+ * eslint-disable @sap/ui5-jsdocs/no-jsdoc
+ */
+
+sap.ui.define([
+        "sap/ui/core/UIComponent",
+        "sap/ui/Device",
+        "tech/model/models"
+    ],
+    function (UIComponent, Device, models) {
+        "use strict";
+
+        return UIComponent.extend("tech.Component", {
+            metadata: {
+                manifest: "json"
+            },
+
+            /**
+             * The component is initialized by UI5 automatically during the startup of the app and calls the init method once.
+             * @public
+             * @override
+             */
+            init: function () {
+                // call the base component's init function
+                UIComponent.prototype.init.apply(this, arguments);
+
+                // enable routing
+                this.getRouter().initialize();
+
+                // set the device model
+                this.setModel(models.createDeviceModel(), "device");
+            }
+        });
+    }
+);
+```
