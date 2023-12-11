@@ -42,7 +42,7 @@ ViewTo.controller.js
 ```
 
 Debes copiar el codigo para cada archivo creado
-## detallesView.view.xml.
+## detallesView.controller.js
 ```
 sap.ui.define(
     [
@@ -74,7 +74,7 @@ sap.ui.define(
 
 
 ```
-## evaluaciones.view.xml.
+## evaluaciones.controller.js
 ```
 sap.ui.define(
     [
@@ -110,7 +110,7 @@ sap.ui.define(
   );
 
 ```
-## form.view.xml.
+## form.controller.js
 ```
 
   sap.ui.define([
@@ -325,7 +325,7 @@ sap.ui.define(
   
 
 ```
-## home.view.xml.
+## home.controller.js
 ```
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
@@ -375,7 +375,7 @@ sap.ui.define([
 
 
 ```
-## View2.view.xml.
+## View2.controller.js
 ```
 /*eslint-disable no-console, no-alert */
 sap.ui.define([
@@ -419,7 +419,7 @@ sap.ui.define([
 });
 
 ```
-## ViewTo.view.xml.
+## ViewTo.controller.js
 ```
 /*eslint-disable no-console, no-alert */
 sap.ui.define([
@@ -516,5 +516,517 @@ sap.ui.define([
 
 });
 
+
+```
+
+
+## detallesView.view.xml
+```
+<mvc:View
+	controllerName="tech.controller.detallesView"
+	xmlns="sap.ui.webc.main"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	height="100%">
+	<l:VerticalLayout class="sapUiContentPadding" width="100%">
+		<Card width="600px" >
+			<List separators="None" >
+				<StandardListItem
+					description="{listApis>Curso}"
+					icon="sap-icon://create-session"
+					text="Curso" />
+
+                    <StandardListItem
+					description="{listApis>Horas}"
+					text="Horas" />
+                
+                        <StandardListItem
+					description="{listApis>Autor}"
+					text="Profesor " />
+                            <StandardListItem
+					description="{listApis>Nivel}"
+					text="Nivel" />
+                            <StandardListItem
+					description="Online"
+					text="Modalidad" />
+				
+			</List>
+		</Card>
+	</l:VerticalLayout>
+</mvc:View>
+```
+## evaluaciones.view.xml
+```
+
+<mvc:View
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:grid="sap.ui.layout.cssgrid"
+	xmlns:f="sap.f"
+	xmlns:dnd="sap.ui.core.dnd"
+	xmlns:dnd-grid="sap.f.dnd"
+	controllerName="tech.controller.evaluaciones">
+    <Page showNavButton="true" navButtonPress="onNavBack">
+	<Panel id="panelForGridList" backgroundDesign="Transparent" >
+
+		<f:GridList
+			id="gridList"
+			headerText="Evaluaciones"
+			items="{path :'listApis>/evaluaciones/'}">
+
+			<f:dragDropConfig>
+				<dnd:DragInfo sourceAggregation="items" />
+				<dnd-grid:GridDropInfo targetAggregation="items" dropPosition="Between" dropLayout="Horizontal" drop="onDrop" />
+			</f:dragDropConfig>
+
+			<f:customLayout>
+				<grid:GridBoxLayout boxMinWidth="17rem" />
+			</f:customLayout>
+
+			<f:GridListItem
+				counter="{counter}"
+				highlight="{listApis>Estatus}"
+				type="{type}"
+				unread="{unread}">
+				<VBox height="100%">
+					<VBox class="sapUiSmallMargin">
+						<layoutData>
+							<FlexItemData growFactor="1" shrinkFactor="0" />
+						</layoutData>
+
+						<Title text="{listApis>Nombre}" wrapping="true" level="H4"/>
+						<Label text="RIF: {listApis>Rif}" wrapping="true" />
+						<Label text="Direccion: {listApis>Direcciones}" wrapping="true" />
+						
+						<Title text="Auditor" wrapping="true" level="H4"/>
+						<Label text="Auditor: {listApis>Auditor}" wrapping="true" />
+						<Label text="Acotacion: {listApis>Acotacion}" wrapping="true" />
+						<Label text="Requisitos: {listApis>Requisitos}" wrapping="true" />
+					</VBox>
+				</VBox>
+			</f:GridListItem>
+		</f:GridList>
+	</Panel>
+    </Page>
+</mvc:View>
+```
+## form.view.xml
+```
+
+<mvc:View
+		height="100%"
+		controllerName="tech.controller.form"
+		xmlns:form="sap.ui.layout.form"
+		xmlns:core="sap.ui.core"
+		xmlns:u="sap.ui.unified"
+		xmlns:mvc="sap.ui.core.mvc"
+		xmlns="sap.m">
+		<NavContainer id="wizardNavContainer">
+			<pages>
+				<Page
+				id="wizardContentPage"
+		
+                showNavButton="true" navButtonPress="onNavBack">
+					<content>
+						<Wizard id="CreateProductWizard" class="sapUiResponsivePadding--header sapUiResponsivePadding--content"
+								complete="wizardCompletedHandler">
+							<WizardStep id="ProductTypeStep"
+										title="Solicitud de certificado"
+										validated="true">
+								<MessageStrip class="sapUiSmallMarginBottom"
+										text="Rellene correctamente los items del formulario"
+										showIcon="true"/>
+								<HBox
+										alignItems="Center"
+										justifyContent="Center"
+										width="100%">
+									<SegmentedButton
+										width="320px"
+										selectionChange="setProductTypeFromSegmented">
+
+									</SegmentedButton>
+								</HBox>
+							</WizardStep>
+							<WizardStep id="ProductInfoStep"
+										validated="false"
+										title="Informacion de la empresa"
+										activate="additionalInfoValidation">
+								<MessageStrip class="sapUiSmallMarginBottom"
+										text="Validation in the wizard is controlled by calling the validateStep(Step) and invalidateStep(Step) methods "
+										showIcon="true"/>
+								<Text text="Cras tellus leo, volutpat vitae ullamcorper eu, posuere malesuada nisl. Integer pellentesque leo sit amet dui vehicula, quis ullamcorper est pulvinar. Nam in libero sem. Suspendisse arcu metus, molestie a turpis a, molestie aliquet dui. Donec pulvinar, sapien et viverra imperdiet, orci erat porttitor nulla, eget commodo metus nibh nec ipsum. Aliquam lacinia euismod metus, sollicitudin pellentesque purus volutpat eget. Pellentesque egestas erat quis eros convallis mattis. Mauris hendrerit sapien a malesu corper eu, posuere malesuada nisl. Integer pellentesque leo sit amet dui vehicula, quis ullamcorper est pulvinar. Nam in libero sem. Suspendisse arcu metus, molestie a turpis a, molestie aliquet dui. Donec pulvinar, sapien	corper eu, posuere malesuada nisl. Integer pellentesque leo sit amet dui vehicula, quis ullamcorper est pulvinar. Nam in libero sem. Suspendisse arcu metus, molestie a turpis a, molestie aliquet dui. Donec pulvinar, sapien	"/>
+								<form:SimpleForm
+										editable="true"
+										layout="ResponsiveGridLayout">
+									<Label text="Nombre de la empresa" required="true"/>
+									<Input valueStateText="Enter 6 symbols or more"
+											valueState="{/productNameState}" id="ProductName" liveChange="additionalInfoValidation"
+											placeholder="Enter name with length greater than 6" value="{/productName}"/>
+									<Label text="RIF" required="true"/>
+									<Input valueStateText="Enter digits"
+											valueState="{/productWeightState}" id="ProductWeight"
+											liveChange="additionalInfoValidation" type="Number" placeholder="Enter digits"
+											value="{/productWeight}"/>
+									<Label text="Manufacturer"/>
+									
+									<Label text="Description"/>
+									<TextArea value="{/productDescription}" rows="8"/>
+								</form:SimpleForm>
+							</WizardStep>
+							<WizardStep id="OptionalInfoStep"
+										validated="true"
+										activate="optionalStepActivation"
+										title="Informacion adicional">
+								<MessageStrip class="sapUiSmallMarginBottom"
+										text="You can validate steps by default with the validated='true' property of the step. The next button is always enabled."
+										showIcon="true"/>
+								<Text text="Integer pellentesque leo sit amet dui vehicula, quis ullamcorper est pulvinar. Nam in libero sem. Suspendisse arcu metus, molestie a turpis a, molestie aliquet dui. Donec ppellentesque leo sit amet dui vehicula, quis ullamcorper est pulvinar. Nam in libero sem. Suspendisse arcu metus, molestie a turpis a, molestie aliquet dui. Donec pulvinar, sapien	corper eu, posuere malesuada nisl. Integer pellentesque leo sit amet dui vehicula, quis ullamcorper est pulvinar. Nam in libero sem. Suspendisse arcu metus, molestie a turpis a, molestie aliquet dui. Donec pulvinar, sapien	"/>
+								<form:SimpleForm
+										editable="true"
+										layout="ResponsiveGridLayout">
+									<Label text="Requisitos legales"/>
+									<u:FileUploader
+											width="100%"
+											tooltip="Upload product cover photo to the local server"
+											style="Emphasized"
+											placeholder="Choose a file for Upload..."/>
+									<Label text="Fecha de solicitud"/>
+									<DatePicker
+											id="DP3"
+											displayFormat="short"
+											value="{/manufacturingDate}"/>
+									<Label text="Availability"/>
+									
+
+								</form:SimpleForm>
+							</WizardStep>
+							<WizardStep id="PricingStep"
+										activate="pricingActivate"
+										complete="pricingComplete"
+										validated="true"
+										title="Revision">
+								<MessageStrip class="sapUiSmallMarginBottom"
+										text="You can use the wizard previousStep() and nextStep() methods to navigate from step to step without validation. Also you can use the GoToStep(step) method to scroll programmatically to previously visited steps."
+										showIcon="true"/>
+								<form:SimpleForm
+										editable="true"
+										layout="ResponsiveGridLayout">
+									<Label text="Auditores"/>
+									<Input value="{/productPrice}"/>
+									<Label text=" Factura comercial"/>
+									<CheckBox selected="{/productVAT}"/>
+								</form:SimpleForm>
+							</WizardStep>
+						</Wizard>
+					</content>
+					<footer>
+						<OverflowToolbar>
+							<ToolbarSpacer/>
+							<Button text="Cancelar" press="handleWizardCancel"/>
+						</OverflowToolbar>
+					</footer>
+				</Page>
+				<Page id="wizardReviewPage" showHeader="false">
+					<content>
+						
+
+						<form:SimpleForm
+								title="2. informacion adicional"
+								minWidth="1024"
+								editable="false"
+								layout="ResponsiveGridLayout">
+							<form:content>
+								<Label text="Name"/>
+								<Text id="ProductNameChosen" text="{/productName}"/>
+						
+								<Label text="Manufacturer"/>
+								<Text id="ProductManufacturerChosen" text="{/productManufacturer}"/>
+								<Label text="Description"/>
+								<Text id="ProductDescriptionChosen" text="{/productDescription}"/>
+								<Link press="editStepTwo" text="Edit" />
+							</form:content>
+						</form:SimpleForm>
+
+						<form:SimpleForm
+								title="3. informacion adicional"
+								minWidth="1024"
+								editable="false"
+								layout="ResponsiveGridLayout">
+							<form:content>
+								<Label text="Some text"/>
+								<Text text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+								tempor incididunt ut labore et dolore magna aliqua. "/>
+								<Label text="Manufacturing Date"/>
+								<Text id="ManufacturingDate" text="{/manufacturingDate}"/>
+								<Label text="Availability"/>
+								<Text id="AvailabilityChosen" text="{/availabilityType}"/>
+								<Label text="Size"/>
+								<HBox>
+									<Text id="Size" text="{/size}"/>
+									<Text id="Size2" class="sapUiTinyMarginBegin" text="{/measurement}"/>
+								</HBox>
+								<Link press="editStepThree" text="Edit" />
+							</form:content>
+						</form:SimpleForm>
+
+						<form:SimpleForm
+								title="4. Revision"
+								minWidth="1024"
+								editable="false"
+								layout="ResponsiveGridLayout">
+							<form:content>
+								<Label text="Price"/>
+								<Text id="ProductPriceChosen" text="{/productPrice}"/>
+								<Label text="VAT Included"/>
+								<Text id="ProductVATChosen" text="{/productVAT}"/>
+								<Link press="editStepFour" text="Edit" />
+							</form:content>
+						</form:SimpleForm>
+					</content>
+					<footer>
+						<Bar>
+							<contentRight>
+								<Button text="Enviar" press="handleWizardSubmit"/>
+								<Button text="Cancelar" press="handleWizardCancel"/>
+							</contentRight>
+						</Bar>
+					</footer>
+				</Page>
+			</pages>
+		</NavContainer>
+</mvc:View>
+```
+## home.view.xml
+```
+
+<mvc:View
+	controllerName="tech.controller.home"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:f="sap.f"
+	xmlns:card="sap.f.cards"
+	xmlns:core="sap.ui.core"
+	xmlns:w="sap.ui.integration.widgets"
+	displayBlock="true"
+	height="100%">
+	<ScrollContainer
+		height="100%"
+		width="100%"
+		vertical="true">
+
+
+			<f:ShellBar
+		title="Certificado Dashboard"
+		secondTitle="{/date}"
+		homeIcon="{/homeIconUrl}"
+		showCopilot="true"
+		showSearch="true"
+		showNotifications="true"
+		showProductSwitcher="true"
+		notificationsNumber="2"
+		class="sapUiSmallMarginTop sapUiSmallMarginBegin">
+	
+	</f:ShellBar>
+
+	
+		<f:GridContainer id="demoGrid" class="sapUiSmallMargin" columnsChange=".onGridColumnsChange">
+			<f:layout>
+				<f:GridContainerSettings rowSize="84px" columnSize="84px" gap="8px" />
+			</f:layout>
+			<f:layoutXS>
+				<f:GridContainerSettings rowSize="70px" columnSize="70px" gap="8px" />
+			</f:layoutXS>
+
+			<GenericTile
+				press="listCert"
+				header="Certificados"
+				subheader="Listado de certificado, agrupado por tipos">
+				<layoutData>
+					<f:GridContainerItemLayoutData minRows="2" columns="2" />
+				</layoutData>
+				<TileContent >
+					<ImageContent src="sap-icon://activity-2" />
+				</TileContent>
+			</GenericTile>
+			 
+
+			<GenericTile press="listCurs" header="Cursos" subheader="Mostrar Cursos Disponibles">
+				<layoutData>
+					<f:GridContainerItemLayoutData minRows="2" columns="2" />
+				</layoutData>
+				<TileContent>
+					<ImageContent src="sap-icon://create-session" />
+				</TileContent>
+			</GenericTile>
+
+			<f:Card>
+				<f:layoutData>
+					<f:GridContainerItemLayoutData columns="4" />
+				</f:layoutData>
+				<f:header>
+			<card:Header title="Upcoming Avtivities" subtitle="For Today" />
+		</f:header>
+				<f:content>
+					
+			<IllustratedMessage illustrationType="sapIllus-NoActivities">
+				<additionalContent>
+					<Button text="Add Activity" />
+				</additionalContent>
+			</IllustratedMessage>
+		
+				</f:content>
+			</f:Card>
+			
+			
+			
+
+			<GenericTile press="formulario" header="Solicitud de Certificados" subheader="Formulario para completar la solicitud">
+				<layoutData>
+					<f:GridContainerItemLayoutData minRows="2" columns="2" />
+				</layoutData>
+				<TileContent>
+					<ImageContent src="sap-icon://multi-select" />
+				</TileContent>
+			</GenericTile>
+
+			<GenericTile press="evaluaciones" header="Evaluaciones" subheader="Mostrar listados para evaluar">
+				<layoutData>
+					<f:GridContainerItemLayoutData minRows="2" columns="2" />
+				</layoutData>
+				<TileContent>
+					<ImageContent src="sap-icon://vertical-bullet-chart" />
+				</TileContent>
+			</GenericTile>
+ 
+		</f:GridContainer>
+	</ScrollContainer>
+</mvc:View>
+
+
+
+```
+## View2.view.xml
+```
+
+<mvc:View
+	controllerName="tech.controller.View2"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:f="sap.f"
+	xmlns:cards="sap.f.cards"
+	xmlns:l="sap.ui.layout"
+	height="100%">
+	<Page title="Cursos Disponibles" showNavButton="true" navButtonPress="onNavBack" class="sapUiResponsiveContentPadding">
+		<Carousel
+			height="auto"
+			pages="{
+				path: 'listApis>/curso/'
+			}">
+			<customLayout>
+				<CarouselLayout visiblePagesCount="2" />
+			</customLayout>
+			<ScrollContainer 
+				vertical="false" 
+				horizontal="false" 
+				class="sapUiContentPadding">
+
+				<f:Card>
+					<f:header>
+						<cards:Header
+							title="{listApis>Curso}"
+							subtitle="{listApis>Autor}"
+							iconSrc="sap-icon://create-session"
+							iconDisplayShape="Square" />
+					</f:header>
+					<f:content>
+						<l:VerticalLayout class="sapUiContentPadding" width="100%">
+							<l:BlockLayout>
+								<l:BlockLayoutRow>
+									<l:BlockLayoutCell title="{listApis>Curso}" width="1">
+										<HBox class="sapUiTinyMarginBottom">
+											<Label text="Descripcion" />
+										</HBox>
+										<HBox class="sapUiSmallMarginBottom">
+											<Text text="{listApis>Descripcion}" />
+										</HBox>
+										<HBox class="sapUiTinyMarginBottom">
+											<Label text="Nivel" />
+										</HBox>
+										<HBox class="sapUiSmallMarginBottom">
+											<Text text="{listApis>Nivel}" />
+										</HBox>
+										<HBox class="sapUiTinyMarginBottom">
+											<Label text="Fecha" />
+										</HBox>
+										<HBox class="sapUiSmallMarginBottom">
+											<Text text="{listApis>fechaCurso}" />
+										</HBox>
+										<Button text="Detalles" press="detalles"></Button>
+									</l:BlockLayoutCell>
+
+									
+								</l:BlockLayoutRow>
+							</l:BlockLayout>
+						</l:VerticalLayout>
+					</f:content>
+				</f:Card>
+			</ScrollContainer>
+		</Carousel>
+	</Page>
+</mvc:View>
+```
+## ViewTo.view.xml
+```
+<mvc:View
+    xmlns:l="sap.ui.layout"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    controllerName="tech.controller.ViewTo"
+>
+    <Page   showNavButton="true" navButtonPress="onNavBack">
+        <List
+            id="certificado"
+            items="{ path : 'listApis>/certificado/', sorter : {  path : 'Grupo',  group : true  } }"
+            headerText="Lista de certificados"
+            growing="true"
+            growingThreshold="4"
+            growingScrollToLoad="false"
+        >
+            <headerToolbar>
+                <Toolbar>
+                    <Title text="{i18n>Listas de Certificados}" />
+                    <ToolbarSpacer />
+                    <SearchField
+                        width="50%"
+                        search=".onFilterInvoices"
+                    />
+                </Toolbar>
+            </headerToolbar>
+            
+            
+            <FeedListItem
+                sender="{listApis>NombCert}"
+                icon="sap-icon://create-session"
+                senderPress="onPress"
+                iconPress="onPress"
+                info=""
+                timestamp="{listApis>FechaCert}"
+                text="{listApis>Descripcion}"
+                convertLinksToAnchorTags="All"
+                actions="print"
+                type="Navigation"
+                        press=".onListItemPressed"
+            >
+                <FeedListItemAction
+                    text="print"
+                    icon="sap-icon://print"
+                    press="print"
+                    
+                />
+            </FeedListItem>
+        </List>
+     <content />
+    </Page>
+</mvc:View>
 
 ```
