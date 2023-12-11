@@ -1,0 +1,32 @@
+<mvc:View
+	controllerName="tech.controller.detallesView"
+	xmlns="sap.ui.webc.main"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	height="100%">
+	<l:VerticalLayout class="sapUiContentPadding" width="100%">
+		<Card width="600px" >
+			<List separators="None" >
+				<StandardListItem
+					description="{listApis>Curso}"
+					icon="sap-icon://create-session"
+					text="Curso" />
+
+                    <StandardListItem
+					description="{listApis>Horas}"
+					text="Horas" />
+                
+                        <StandardListItem
+					description="{listApis>Autor}"
+					text="Profesor " />
+                            <StandardListItem
+					description="{listApis>Nivel}"
+					text="Nivel" />
+                            <StandardListItem
+					description="Online"
+					text="Modalidad" />
+				
+			</List>
+		</Card>
+	</l:VerticalLayout>
+</mvc:View>

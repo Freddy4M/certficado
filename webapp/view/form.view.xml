@@ -1,0 +1,183 @@
+
+<mvc:View
+		height="100%"
+		controllerName="tech.controller.form"
+		xmlns:form="sap.ui.layout.form"
+		xmlns:core="sap.ui.core"
+		xmlns:u="sap.ui.unified"
+		xmlns:mvc="sap.ui.core.mvc"
+		xmlns="sap.m">
+		<NavContainer id="wizardNavContainer">
+			<pages>
+				<Page
+				id="wizardContentPage"
+		
+                showNavButton="true" navButtonPress="onNavBack">
+					<content>
+						<Wizard id="CreateProductWizard" class="sapUiResponsivePadding--header sapUiResponsivePadding--content"
+								complete="wizardCompletedHandler">
+							<WizardStep id="ProductTypeStep"
+										title="Solicitud de certificado"
+										validated="true">
+								<MessageStrip class="sapUiSmallMarginBottom"
+										text="Rellene correctamente los items del formulario"
+										showIcon="true"/>
+								<HBox
+										alignItems="Center"
+										justifyContent="Center"
+										width="100%">
+									<SegmentedButton
+										width="320px"
+										selectionChange="setProductTypeFromSegmented">
+
+									</SegmentedButton>
+								</HBox>
+							</WizardStep>
+							<WizardStep id="ProductInfoStep"
+										validated="false"
+										title="Informacion de la empresa"
+										activate="additionalInfoValidation">
+								<MessageStrip class="sapUiSmallMarginBottom"
+										text="Validation in the wizard is controlled by calling the validateStep(Step) and invalidateStep(Step) methods "
+										showIcon="true"/>
+								<Text text="Cras tellus leo, volutpat vitae ullamcorper eu, posuere malesuada nisl. Integer pellentesque leo sit amet dui vehicula, quis ullamcorper est pulvinar. Nam in libero sem. Suspendisse arcu metus, molestie a turpis a, molestie aliquet dui. Donec pulvinar, sapien et viverra imperdiet, orci erat porttitor nulla, eget commodo metus nibh nec ipsum. Aliquam lacinia euismod metus, sollicitudin pellentesque purus volutpat eget. Pellentesque egestas erat quis eros convallis mattis. Mauris hendrerit sapien a malesu corper eu, posuere malesuada nisl. Integer pellentesque leo sit amet dui vehicula, quis ullamcorper est pulvinar. Nam in libero sem. Suspendisse arcu metus, molestie a turpis a, molestie aliquet dui. Donec pulvinar, sapien	corper eu, posuere malesuada nisl. Integer pellentesque leo sit amet dui vehicula, quis ullamcorper est pulvinar. Nam in libero sem. Suspendisse arcu metus, molestie a turpis a, molestie aliquet dui. Donec pulvinar, sapien	"/>
+								<form:SimpleForm
+										editable="true"
+										layout="ResponsiveGridLayout">
+									<Label text="Nombre de la empresa" required="true"/>
+									<Input valueStateText="Enter 6 symbols or more"
+											valueState="{/productNameState}" id="ProductName" liveChange="additionalInfoValidation"
+											placeholder="Enter name with length greater than 6" value="{/productName}"/>
+									<Label text="RIF" required="true"/>
+									<Input valueStateText="Enter digits"
+											valueState="{/productWeightState}" id="ProductWeight"
+											liveChange="additionalInfoValidation" type="Number" placeholder="Enter digits"
+											value="{/productWeight}"/>
+									<Label text="Manufacturer"/>
+									
+									<Label text="Description"/>
+									<TextArea value="{/productDescription}" rows="8"/>
+								</form:SimpleForm>
+							</WizardStep>
+							<WizardStep id="OptionalInfoStep"
+										validated="true"
+										activate="optionalStepActivation"
+										title="Informacion adicional">
+								<MessageStrip class="sapUiSmallMarginBottom"
+										text="You can validate steps by default with the validated='true' property of the step. The next button is always enabled."
+										showIcon="true"/>
+								<Text text="Integer pellentesque leo sit amet dui vehicula, quis ullamcorper est pulvinar. Nam in libero sem. Suspendisse arcu metus, molestie a turpis a, molestie aliquet dui. Donec ppellentesque leo sit amet dui vehicula, quis ullamcorper est pulvinar. Nam in libero sem. Suspendisse arcu metus, molestie a turpis a, molestie aliquet dui. Donec pulvinar, sapien	corper eu, posuere malesuada nisl. Integer pellentesque leo sit amet dui vehicula, quis ullamcorper est pulvinar. Nam in libero sem. Suspendisse arcu metus, molestie a turpis a, molestie aliquet dui. Donec pulvinar, sapien	"/>
+								<form:SimpleForm
+										editable="true"
+										layout="ResponsiveGridLayout">
+									<Label text="Requisitos legales"/>
+									<u:FileUploader
+											width="100%"
+											tooltip="Upload product cover photo to the local server"
+											style="Emphasized"
+											placeholder="Choose a file for Upload..."/>
+									<Label text="Fecha de solicitud"/>
+									<DatePicker
+											id="DP3"
+											displayFormat="short"
+											value="{/manufacturingDate}"/>
+									<Label text="Availability"/>
+									
+
+								</form:SimpleForm>
+							</WizardStep>
+							<WizardStep id="PricingStep"
+										activate="pricingActivate"
+										complete="pricingComplete"
+										validated="true"
+										title="Revision">
+								<MessageStrip class="sapUiSmallMarginBottom"
+										text="You can use the wizard previousStep() and nextStep() methods to navigate from step to step without validation. Also you can use the GoToStep(step) method to scroll programmatically to previously visited steps."
+										showIcon="true"/>
+								<form:SimpleForm
+										editable="true"
+										layout="ResponsiveGridLayout">
+									<Label text="Auditores"/>
+									<Input value="{/productPrice}"/>
+									<Label text=" Factura comercial"/>
+									<CheckBox selected="{/productVAT}"/>
+								</form:SimpleForm>
+							</WizardStep>
+						</Wizard>
+					</content>
+					<footer>
+						<OverflowToolbar>
+							<ToolbarSpacer/>
+							<Button text="Cancelar" press="handleWizardCancel"/>
+						</OverflowToolbar>
+					</footer>
+				</Page>
+				<Page id="wizardReviewPage" showHeader="false">
+					<content>
+						
+
+						<form:SimpleForm
+								title="2. informacion adicional"
+								minWidth="1024"
+								editable="false"
+								layout="ResponsiveGridLayout">
+							<form:content>
+								<Label text="Name"/>
+								<Text id="ProductNameChosen" text="{/productName}"/>
+						
+								<Label text="Manufacturer"/>
+								<Text id="ProductManufacturerChosen" text="{/productManufacturer}"/>
+								<Label text="Description"/>
+								<Text id="ProductDescriptionChosen" text="{/productDescription}"/>
+								<Link press="editStepTwo" text="Edit" />
+							</form:content>
+						</form:SimpleForm>
+
+						<form:SimpleForm
+								title="3. informacion adicional"
+								minWidth="1024"
+								editable="false"
+								layout="ResponsiveGridLayout">
+							<form:content>
+								<Label text="Some text"/>
+								<Text text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+								tempor incididunt ut labore et dolore magna aliqua. "/>
+								<Label text="Manufacturing Date"/>
+								<Text id="ManufacturingDate" text="{/manufacturingDate}"/>
+								<Label text="Availability"/>
+								<Text id="AvailabilityChosen" text="{/availabilityType}"/>
+								<Label text="Size"/>
+								<HBox>
+									<Text id="Size" text="{/size}"/>
+									<Text id="Size2" class="sapUiTinyMarginBegin" text="{/measurement}"/>
+								</HBox>
+								<Link press="editStepThree" text="Edit" />
+							</form:content>
+						</form:SimpleForm>
+
+						<form:SimpleForm
+								title="4. Revision"
+								minWidth="1024"
+								editable="false"
+								layout="ResponsiveGridLayout">
+							<form:content>
+								<Label text="Price"/>
+								<Text id="ProductPriceChosen" text="{/productPrice}"/>
+								<Label text="VAT Included"/>
+								<Text id="ProductVATChosen" text="{/productVAT}"/>
+								<Link press="editStepFour" text="Edit" />
+							</form:content>
+						</form:SimpleForm>
+					</content>
+					<footer>
+						<Bar>
+							<contentRight>
+								<Button text="Enviar" press="handleWizardSubmit"/>
+								<Button text="Cancelar" press="handleWizardCancel"/>
+							</contentRight>
+						</Bar>
+					</footer>
+				</Page>
+			</pages>
+		</NavContainer>
+</mvc:View>

@@ -1,0 +1,105 @@
+
+<mvc:View
+	controllerName="tech.controller.home"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:f="sap.f"
+	xmlns:card="sap.f.cards"
+	xmlns:core="sap.ui.core"
+	xmlns:w="sap.ui.integration.widgets"
+	displayBlock="true"
+	height="100%">
+	<ScrollContainer
+		height="100%"
+		width="100%"
+		vertical="true">
+
+
+			<f:ShellBar
+		title="Certificado Dashboard"
+		secondTitle="{/date}"
+		homeIcon="{/homeIconUrl}"
+		showCopilot="true"
+		showSearch="true"
+		showNotifications="true"
+		showProductSwitcher="true"
+		notificationsNumber="2"
+		class="sapUiSmallMarginTop sapUiSmallMarginBegin">
+	
+	</f:ShellBar>
+
+	
+		<f:GridContainer id="demoGrid" class="sapUiSmallMargin" columnsChange=".onGridColumnsChange">
+			<f:layout>
+				<f:GridContainerSettings rowSize="84px" columnSize="84px" gap="8px" />
+			</f:layout>
+			<f:layoutXS>
+				<f:GridContainerSettings rowSize="70px" columnSize="70px" gap="8px" />
+			</f:layoutXS>
+
+			<GenericTile
+				press="listCert"
+				header="Certificados"
+				subheader="Listado de certificado, agrupado por tipos">
+				<layoutData>
+					<f:GridContainerItemLayoutData minRows="2" columns="2" />
+				</layoutData>
+				<TileContent >
+					<ImageContent src="sap-icon://activity-2" />
+				</TileContent>
+			</GenericTile>
+			 
+
+			<GenericTile press="listCurs" header="Cursos" subheader="Mostrar Cursos Disponibles">
+				<layoutData>
+					<f:GridContainerItemLayoutData minRows="2" columns="2" />
+				</layoutData>
+				<TileContent>
+					<ImageContent src="sap-icon://create-session" />
+				</TileContent>
+			</GenericTile>
+
+			<f:Card>
+				<f:layoutData>
+					<f:GridContainerItemLayoutData columns="4" />
+				</f:layoutData>
+				<f:header>
+			<card:Header title="Upcoming Avtivities" subtitle="For Today" />
+		</f:header>
+				<f:content>
+					
+			<IllustratedMessage illustrationType="sapIllus-NoActivities">
+				<additionalContent>
+					<Button text="Add Activity" />
+				</additionalContent>
+			</IllustratedMessage>
+		
+				</f:content>
+			</f:Card>
+			
+			
+			
+
+			<GenericTile press="formulario" header="Solicitud de Certificados" subheader="Formulario para completar la solicitud">
+				<layoutData>
+					<f:GridContainerItemLayoutData minRows="2" columns="2" />
+				</layoutData>
+				<TileContent>
+					<ImageContent src="sap-icon://multi-select" />
+				</TileContent>
+			</GenericTile>
+
+			<GenericTile press="evaluaciones" header="Evaluaciones" subheader="Mostrar listados para evaluar">
+				<layoutData>
+					<f:GridContainerItemLayoutData minRows="2" columns="2" />
+				</layoutData>
+				<TileContent>
+					<ImageContent src="sap-icon://vertical-bullet-chart" />
+				</TileContent>
+			</GenericTile>
+ 
+		</f:GridContainer>
+	</ScrollContainer>
+</mvc:View>
+
+

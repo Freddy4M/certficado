@@ -1,0 +1,51 @@
+<mvc:View
+    xmlns:l="sap.ui.layout"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    controllerName="tech.controller.ViewTo"
+>
+    <Page   showNavButton="true" navButtonPress="onNavBack">
+        <List
+            id="certificado"
+            items="{ path : 'listApis>/certificado/', sorter : {  path : 'Grupo',  group : true  } }"
+            headerText="Lista de certificados"
+            growing="true"
+            growingThreshold="4"
+            growingScrollToLoad="false"
+        >
+            <headerToolbar>
+                <Toolbar>
+                    <Title text="{i18n>Listas de Certificados}" />
+                    <ToolbarSpacer />
+                    <SearchField
+                        width="50%"
+                        search=".onFilterInvoices"
+                    />
+                </Toolbar>
+            </headerToolbar>
+            
+            
+            <FeedListItem
+                sender="{listApis>NombCert}"
+                icon="sap-icon://create-session"
+                senderPress="onPress"
+                iconPress="onPress"
+                info=""
+                timestamp="{listApis>FechaCert}"
+                text="{listApis>Descripcion}"
+                convertLinksToAnchorTags="All"
+                actions="print"
+                type="Navigation"
+                        press=".onListItemPressed"
+            >
+                <FeedListItemAction
+                    text="print"
+                    icon="sap-icon://print"
+                    press="print"
+                    
+                />
+            </FeedListItem>
+        </List>
+     <content />
+    </Page>
+</mvc:View>

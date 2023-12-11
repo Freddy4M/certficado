@@ -1,0 +1,52 @@
+
+<mvc:View
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:grid="sap.ui.layout.cssgrid"
+	xmlns:f="sap.f"
+	xmlns:dnd="sap.ui.core.dnd"
+	xmlns:dnd-grid="sap.f.dnd"
+	controllerName="tech.controller.evaluaciones">
+    <Page showNavButton="true" navButtonPress="onNavBack">
+	<Panel id="panelForGridList" backgroundDesign="Transparent" >
+
+		<f:GridList
+			id="gridList"
+			headerText="Evaluaciones"
+			items="{path :'listApis>/evaluaciones/'}">
+
+			<f:dragDropConfig>
+				<dnd:DragInfo sourceAggregation="items" />
+				<dnd-grid:GridDropInfo targetAggregation="items" dropPosition="Between" dropLayout="Horizontal" drop="onDrop" />
+			</f:dragDropConfig>
+
+			<f:customLayout>
+				<grid:GridBoxLayout boxMinWidth="17rem" />
+			</f:customLayout>
+
+			<f:GridListItem
+				counter="{counter}"
+				highlight="{listApis>Estatus}"
+				type="{type}"
+				unread="{unread}">
+				<VBox height="100%">
+					<VBox class="sapUiSmallMargin">
+						<layoutData>
+							<FlexItemData growFactor="1" shrinkFactor="0" />
+						</layoutData>
+
+						<Title text="{listApis>Nombre}" wrapping="true" level="H4"/>
+						<Label text="RIF: {listApis>Rif}" wrapping="true" />
+						<Label text="Direccion: {listApis>Direcciones}" wrapping="true" />
+						
+						<Title text="Auditor" wrapping="true" level="H4"/>
+						<Label text="Auditor: {listApis>Auditor}" wrapping="true" />
+						<Label text="Acotacion: {listApis>Acotacion}" wrapping="true" />
+						<Label text="Requisitos: {listApis>Requisitos}" wrapping="true" />
+					</VBox>
+				</VBox>
+			</f:GridListItem>
+		</f:GridList>
+	</Panel>
+    </Page>
+</mvc:View>

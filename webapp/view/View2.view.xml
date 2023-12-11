@@ -1,0 +1,67 @@
+
+<mvc:View
+	controllerName="tech.controller.View2"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:f="sap.f"
+	xmlns:cards="sap.f.cards"
+	xmlns:l="sap.ui.layout"
+	height="100%">
+	<Page title="Cursos Disponibles" showNavButton="true" navButtonPress="onNavBack" class="sapUiResponsiveContentPadding">
+		<Carousel
+			height="auto"
+			pages="{
+				path: 'listApis>/curso/'
+			}">
+			<customLayout>
+				<CarouselLayout visiblePagesCount="2" />
+			</customLayout>
+			<ScrollContainer 
+				vertical="false" 
+				horizontal="false" 
+				class="sapUiContentPadding">
+
+				<f:Card>
+					<f:header>
+						<cards:Header
+							title="{listApis>Curso}"
+							subtitle="{listApis>Autor}"
+							iconSrc="sap-icon://create-session"
+							iconDisplayShape="Square" />
+					</f:header>
+					<f:content>
+						<l:VerticalLayout class="sapUiContentPadding" width="100%">
+							<l:BlockLayout>
+								<l:BlockLayoutRow>
+									<l:BlockLayoutCell title="{listApis>Curso}" width="1">
+										<HBox class="sapUiTinyMarginBottom">
+											<Label text="Descripcion" />
+										</HBox>
+										<HBox class="sapUiSmallMarginBottom">
+											<Text text="{listApis>Descripcion}" />
+										</HBox>
+										<HBox class="sapUiTinyMarginBottom">
+											<Label text="Nivel" />
+										</HBox>
+										<HBox class="sapUiSmallMarginBottom">
+											<Text text="{listApis>Nivel}" />
+										</HBox>
+										<HBox class="sapUiTinyMarginBottom">
+											<Label text="Fecha" />
+										</HBox>
+										<HBox class="sapUiSmallMarginBottom">
+											<Text text="{listApis>fechaCurso}" />
+										</HBox>
+										<Button text="Detalles" press="detalles"></Button>
+									</l:BlockLayoutCell>
+
+									
+								</l:BlockLayoutRow>
+							</l:BlockLayout>
+						</l:VerticalLayout>
+					</f:content>
+				</f:Card>
+			</ScrollContainer>
+		</Carousel>
+	</Page>
+</mvc:View>
