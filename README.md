@@ -6,6 +6,7 @@
 ![image](https://github.com/Freddy4M/certficado/assets/48028307/2d350b59-9df9-4512-9d46-4c351c9c1b9b)
 ![image](https://github.com/Freddy4M/certficado/assets/48028307/f117b5e4-3243-40fa-a2bc-b696e645a24b)
 
+
 ## Creacion del proyecto
 
 ![image](https://github.com/Freddy4M/proyecto-sap/assets/48028307/c544a5fb-c2b2-4d7c-90b3-a4081fd05cc6)
@@ -20,6 +21,10 @@
 ![image](https://github.com/Freddy4M/proyecto-sap/assets/48028307/b6981b95-c14d-4ebb-a32c-4a879fe09d1d)
 Mas informacion :
 https://github.com/SAP-samples/teched2022-AD280/tree/main/exercises/ex2/ex2.1
+
+
+## Nombre de las vistas:
+![image](https://github.com/Freddy4M/certficado/assets/48028307/53ae3449-2e47-4501-9e36-ac3447fbc4ed)
 
 ## Nombre de los archivos (vista y controladores).
 (Vistas)
